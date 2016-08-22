@@ -7,6 +7,7 @@
 //
 
 #import "HeaderViewController.h"
+#import <Masonry.h>
 
 @interface HeaderViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) UITableView *tableView;
@@ -46,6 +47,24 @@
     _headerImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"我的_02"]];
     _headerImageView.frame = CGRectMake(0, 0, _size.width, 200);
     [self.view addSubview:_headerImageView];
+    
+    //    /*
+    //     毛玻璃的样式(枚举)
+    //     UIBlurEffectStyleExtraLight,
+    //     UIBlurEffectStyleLight,
+    //     UIBlurEffectStyleDark
+    //     */
+    UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+    UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
+    effectView.translatesAutoresizingMaskIntoConstraints = NO;
+    [_headerImageView addSubview:effectView];
+    
+    [effectView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(_headerImageView.mas_top);
+        make.left.mas_equalTo(_headerImageView.mas_left);
+        make.right.mas_equalTo(_headerImageView.mas_right);
+        make.bottom.mas_equalTo(_headerImageView.mas_bottom);
+    }];
     
     _headerSubImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"我的_02"]];
     _headerSubImageView.frame = CGRectMake(0, 0, 100, 100);
